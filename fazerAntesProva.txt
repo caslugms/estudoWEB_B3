@@ -1,2 +1,37 @@
 npm init -y
 npm install express jsonwebtoken bcryptjs body-parser
+
+
+para testar: 1️⃣ Login e pegar token
+curl -X POST http://localhost:3000/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"123"}'
+
+
+Resposta: { "token": "SEU_TOKEN_AQUI" }
+
+Copie o token que receber para usar nos próximos comandos.
+
+2️⃣ Listar itens (GET /itens)
+curl -X GET http://localhost:3000/itens \
+  -H "Authorization: SEU_TOKEN_AQUI" \
+  -H "Content-Type: application/json"
+
+3️⃣ Criar um novo item (POST /itens)
+curl -X POST http://localhost:3000/itens \
+  -H "Authorization: SEU_TOKEN_AQUI" \
+  -H "Content-Type: application/json" \
+  -d '{"nome":"Produto Teste","preco":15.50}'
+
+4️⃣ Atualizar um item (PUT /itens/:id)
+
+Supondo que o id do item criado seja 1690000000000:
+
+curl -X PUT http://localhost:3000/itens/1690000000000 \
+  -H "Authorization: SEU_TOKEN_AQUI" \
+  -H "Content-Type: application/json" \
+  -d '{"preco":20.00}'
+
+5️⃣ Deletar um item (DELETE /itens/:id)
+curl -X DELETE http://localhost:3000/itens/1690000000000 \
+  -H "Authorization: SEU_TOKEN_AQUI"
